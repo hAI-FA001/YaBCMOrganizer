@@ -257,6 +257,7 @@ class EntryPanel(wx.Panel):
         if 'max' not in kwargs:
             kwargs['max'] = 3.402823466e38
 
+        kwargs['inc'] = 0.01
         return wx.SpinCtrlDouble(panel, *args, **kwargs)
 
     def on_edit(self, _):

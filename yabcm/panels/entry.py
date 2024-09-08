@@ -135,6 +135,7 @@ class EntryPanel(wx.Panel):
         # Activator State
         self.activator_state = self.add_multiple_selection_entry(
             activator_panel, 'Activator State', cols=2, orient=wx.VERTICAL, choices=[
+                ('', ['Forwards', 'Backwards', 'Left', 'Right'], True),
                 ('', ['Receiving Damage', 'Jumping', 'Not being damaged', 'Target attacking player'], True),
                 ('', ['Idle', 'Combo/skill', 'Boosting', 'Guarding'], True)
             ])
@@ -181,7 +182,21 @@ class EntryPanel(wx.Panel):
         ])
 
         self.u_6a = self.add_hex_entry(unknown_panel, 'U_6A', max=MAX_UINT16)
-        self.u_6c = self.add_hex_entry(unknown_panel, 'U_6C', max=MAX_UINT32)
+        self.u_6c = self.add_multiple_selection_entry(
+            misc_panel, 'Race/Gender', majorDimension=2, choices=[
+                ('', {
+                    'All Characters/Default': 0x0,
+                    'Roster Characters only': 0x1,
+                    'Male Humans only': 0x2,
+                    'Female Humans only': 0x3,
+                    'Male Saiyans only': 0x4,
+                    'Female Saiyans only': 0x5,
+                    'Namekians only': 0x6,
+                    'Freeza Racists only': 0x7,
+                    'Male Majins only': 0x8,
+                    'Female Majins only': 0x9
+                }, False)
+            ])
 
         # Binds
         self.Bind(wx.EVT_TEXT, self.on_edit)
@@ -256,6 +271,7 @@ class EntryPanel(wx.Panel):
                 self[name].SetValue(address_to_index(entry[name]))
             else:
                 self[name].SetValue(entry[name])
+            
         if entry.address == 0:
             self.Disable()
         else:

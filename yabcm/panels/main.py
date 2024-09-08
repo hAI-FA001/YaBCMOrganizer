@@ -20,21 +20,21 @@ class MainPanel(wx.Panel):
 
         self.append_id = wx.NewId()
         self.insert_id = wx.NewId()
-        self.comment_id = wx.NewId()
+        # self.comment_id = wx.NewId()
         self.Bind(wx.EVT_MENU, self.on_delete, id=wx.ID_DELETE)
         self.Bind(wx.EVT_MENU, self.on_copy, id=wx.ID_COPY)
         self.Bind(wx.EVT_MENU, self.on_paste, id=wx.ID_PASTE)
         self.Bind(wx.EVT_MENU, self.on_add_child, id=wx.ID_ADD)
         self.Bind(wx.EVT_MENU, self.on_append, id=self.append_id)
         self.Bind(wx.EVT_MENU, self.on_insert, id=self.insert_id)
-        self.Bind(wx.EVT_MENU, self.on_comment, id=self.comment_id)
+        # self.Bind(wx.EVT_MENU, self.on_comment, id=self.comment_id)
         accelerator_table = wx.AcceleratorTable([
             (wx.ACCEL_CTRL, ord('a'), self.append_id),
             (wx.ACCEL_CTRL, ord('i'), self.insert_id),
             (wx.ACCEL_CTRL, ord('n'), wx.ID_ADD),
             (wx.ACCEL_CTRL, ord('c'), wx.ID_COPY),
             (wx.ACCEL_CTRL, ord('v'), wx.ID_PASTE),
-            (wx.ACCEL_CTRL, ord('q'), self.comment_id),
+            # (wx.ACCEL_CTRL, ord('q'), self.comment_id),
             (wx.ACCEL_NORMAL, wx.WXK_DELETE, wx.ID_DELETE),
         ])
         self.entry_list.SetAcceleratorTable(accelerator_table)
@@ -71,16 +71,16 @@ class MainPanel(wx.Panel):
             wx.TheClipboard.Close()
 
         #comment stuff
-        comment = menu.Append(self.comment_id, "Add Comment\tCtrl+Q", "Add Comment")
+        # comment = menu.Append(self.comment_id, "Add Comment\tCtrl+Q", "Add Comment")
 
 
         for sel in self.entry_list.GetSelections():
             entry = self.entry_list.GetItemData(sel)
             entry_class_name = entry.__class__.__name__
 
-            if entry.get_name() != "Entry":
-                comment.Enable(False)
-                break
+            # if entry.get_name() != "Entry":
+            #     comment.Enable(False)
+            #     break
 
         paste.Enable(success)
         delete.Enable(enabled)
@@ -96,7 +96,9 @@ class MainPanel(wx.Panel):
         pub.sendMessage('load_entry', entry=self.entry_list.GetItemData(item))
 
     def update_entry(self, item, entry):
-        self.entry_list.SetItemText(item, f'{entry.index}: Entry (0x{entry.flags:X}){entry.getDisplayComment()}')
+        self.entry_list.SetItemText(item, f'{entry.index}: Entry (0x{entry.flags:X})'
+                                    # {entry.getDisplayComment()}'
+                                    )
 
     def expand_parents(self, item):
         root = self.entry_list.GetRootItem()
@@ -367,7 +369,7 @@ class MainPanel(wx.Panel):
             text += f", Sibling: {address_to_index(entry.sibling)}"
         if child_address != entry.child:
             text += f", Child: {address_to_index(entry.child)}"
-        text += f"{entry.getDisplayComment()}"
+        # text += f"{entry.getDisplayComment()}"
         self.entry_list.SetItemText(item, text)
 
     def reindex(self, insert_at_first=False):
@@ -420,7 +422,7 @@ class MainPanel(wx.Panel):
                 text += f", Sibling: {address_to_index(entry.sibling)}"
             if child_address != entry.child:
                 text += f", Child: {address_to_index(entry.child)}"
-            text += f"{entry.getDisplayComment()}"
+            # text += f"{entry.getDisplayComment()}"
             self.entry_list.SetItemText(item, text)
 
             entries.append(entry)

@@ -165,7 +165,7 @@ class MainWindow(wx.Frame):
             return
         self.bcm = new_bcm
         self.main_panel.bcm = new_bcm
-        self.bcm.loadComment(path)
+        # self.bcm.loadComment(path)
         # Build Tree
         self.entry_list.DeleteAllItems()
         temp_entry_list = {
@@ -198,7 +198,7 @@ class MainWindow(wx.Frame):
             path = os.path.join(self.dirname, filename)
             self.main_panel.reindex()
             self.bcm.save(path)
-            self.bcm.saveComment(path)
+            # self.bcm.saveComment(path)
             self.statusbar.SetStatusText(f"Saved {path}")
             saved = wx.MessageDialog(self, f"Saved to {path} successfully", "BCM Saved")
             saved.ShowModal()

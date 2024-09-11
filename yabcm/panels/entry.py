@@ -106,9 +106,25 @@ class EntryPanel(wx.Panel):
                 }, False)
         ])
 
-        # Opponent Size Conditions
-        self.opponent_size_conditions = self.add_hex_entry(
-            activator_panel, 'Opponent Size\nConditions', max=MAX_UINT32)
+        self.opponent_size_conditions = self.add_multiple_selection_entry(
+            activator_panel, 'Misc\nConditions', cols=4, orient=wx.VERTICAL, choices=[
+                ('Skill Upgrade 1', ["Unk (0x1)", "Unk (0x2)",
+                            "Unk (0x4)", "Unk (0x8)"], True),
+                ('Skill Upgrade 2', ["Unk (0x1)", "Unk (0x2)",
+                            "Unk (0x4)", "Unk (0x8)"], True),
+                ('Opponent Size 1', ["Unk (0x1)", "Unk (0x2)",
+                            "Unk (0x4)", "Unk (0x8)"], True),
+                ('Opponent Size 2', ["Unk (0x1)", "Unk (0x2)",
+                            "Unk (0x4)", "Unk (0x8)"], True),
+                ('Unk Size 1', ["Unk (0x1)", "Unk (0x2)",
+                            "Unk (0x4)", "Unk (0x8)"], True),
+                ('Unk Size 2', ["Unk (0x1)", "Unk (0x2)",
+                            "Unk (0x4)", "Unk (0x8)"], True),
+                ('Unk Size 3', ["Unk (0x1)", "Unk (0x2)",
+                            "Unk (0x4)", "Unk (0x8)"], True),
+                ('Unk Size 4', ["Unk (0x1)", "Unk (0x2)",
+                            "Unk (0x4)", "Unk (0x8)"], True),
+            ])
 
         # Minimum Loop Duration
         self.minimum_loop_duration = self.add_num_entry(

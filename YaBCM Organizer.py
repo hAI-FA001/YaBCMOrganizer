@@ -17,6 +17,7 @@ from yabcm.dlg.replace import ReplaceDialog
 from pyxenoverse.gui.file_drop_target import FileDropTarget
 
 import yabcm.darkmode as darkmode
+from yabcm.my_helpers import convert_to_px
 
 VERSION = '0.2.9'
 
@@ -30,7 +31,7 @@ class MainWindow(wx.Frame):
 
         # A "-1" in the size parameter instructs wxWidgets to use the default size.
         # In this case, we select 200px width and the default height.
-        wx.Frame.__init__(self, parent, title=title, size=(1300, 900))
+        wx.Frame.__init__(self, parent, title=title, size=(convert_to_px(1300), convert_to_px(900, False)))
         self.statusbar = self.CreateStatusBar() # A Statusbar in the bottom of the window
 
         # Panels
@@ -105,9 +106,9 @@ class MainWindow(wx.Frame):
         sizer = wx.BoxSizer(wx.VERTICAL)
         button_sizer = wx.BoxSizer()
         button_sizer.Add(open_button)
-        button_sizer.AddSpacer(10)
+        button_sizer.AddSpacer(convert_to_px(10, False))
         button_sizer.Add(save_button)
-        button_sizer.AddSpacer(10)
+        button_sizer.AddSpacer(convert_to_px(10, False))
         button_sizer.Add(toggle_dark_mode_button)
         button_sizer.Add(hyperlink, 0, wx.ALL, 10)
 

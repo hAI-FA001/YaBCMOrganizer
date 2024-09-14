@@ -5,6 +5,7 @@ from pyxenoverse.gui import get_next_item, get_first_item, get_item_index
 from pubsub import pub
 
 from yabcm.dlg.comment import CommentDialog
+from yabcm.my_helpers import convert_to_px
 
 
 class MainPanel(wx.Panel):

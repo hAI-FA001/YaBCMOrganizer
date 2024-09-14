@@ -8,6 +8,9 @@ from pyxenoverse.gui.ctrl.hex_ctrl import HexCtrl
 from pyxenoverse.gui.ctrl.multiple_selection_box import MultipleSelectionBox
 from pyxenoverse.gui.ctrl.single_selection_box import SingleSelectionBox
 
+from yabcm.my_helpers import convert_to_px
+
+
 MAX_UINT16 = 0xFFFF
 MAX_UINT32 = 0xFFFFFFFF
 LABEL_STYLE = wx.ALIGN_CENTER_VERTICAL | wx.ALL
@@ -16,7 +19,7 @@ LABEL_STYLE = wx.ALIGN_CENTER_VERTICAL | wx.ALL
 class Page(ScrolledPanel):
     def __init__(self, parent, rows=32):
         ScrolledPanel.__init__(self, parent)
-        self.sizer = wx.FlexGridSizer(rows=rows, cols=2, hgap=5, vgap=5)
+        self.sizer = wx.FlexGridSizer(rows=rows, cols=2, hgap=convert_to_px(5), vgap=convert_to_px(5, False))
         self.SetSizer(self.sizer)
         self.SetupScrolling()
 
@@ -243,13 +246,13 @@ class EntryPanel(wx.Panel):
     @add_entry
     def add_hex_entry(self, parent, _, *args, **kwargs):
         if 'size' not in kwargs:
-            kwargs['size'] = (150, -1)
+            kwargs['size'] = (convert_to_px(150), -1)
         return HexCtrl(parent, *args, **kwargs)
 
     @add_entry
     def add_num_entry(self, panel, _, unsigned=False, *args, **kwargs):
         if 'size' not in kwargs:
-            kwargs['size'] = (150, -1)
+            kwargs['size'] = (convert_to_px(150), -1)
         if unsigned:
             kwargs['min'], kwargs['max'] = kwargs.get('min', 0), kwargs.get('max', 65535)
         else:
@@ -267,7 +270,7 @@ class EntryPanel(wx.Panel):
     @add_entry
     def add_float_entry(self, panel, _, *args, **kwargs):
         if 'size' not in kwargs:
-            kwargs['size'] = (150, -1)
+            kwargs['size'] = (convert_to_px(150), -1)
         if 'min' not in kwargs:
             kwargs['min'] = -3.402823466e38
         if 'max' not in kwargs:
